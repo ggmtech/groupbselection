@@ -1,0 +1,355 @@
+% supplementary 
+\documentclass[12pt,addpoints]{exam} %, answers
+%\documentclass[12pt,addpoints,answers]{exam}  %a 
+% or \printanswers at beginning, inside %\noprintanswers
+%%%``cancelspace'' argument for no answerspaces against solutions in qpaper
+
+\RequirePackage{amssymb, amsfonts, amsmath, latexsym, verbatim, xspace, setspace}
+\RequirePackage{tikz, pgflibraryplotmarks}
+\usepackage{caption}   % for captionof command worked
+\usepackage[margin=1in]{geometry}       % By default LaTeX uses large margins.
+
+\usepackage{graphicx}
+\usepackage{pdfpages}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%test
+\def\LOGO{%
+\begin{picture}(0,0)\unitlength=1cm
+\put (3,1) {\includegraphics[width=5em]{IRlogored.png}}     %did change -1 to +1
+\end{picture}
+}
+
+%%%%%########################################
+%%% https://www.overleaf.com/project/61b06701ca3ed1b47d9a229b tize LianTze Lim
+%% fonts hindi   https://www.overleaf.com/help/193
+%% Aksharyogini2, Annapurna SIL, BABEL Unicode, Baloo 2,Chandas, Eczar,FreeSans,FreeSerif
+% Gargi, Gotu , IBM Plex Sans Devanagari, Jaini,Jaini Purva,Kalimati
+% Lohit Devanagari,Lohit Marathi,Lohit Nepali,Modak,Mukta,Nakula,Noto Sans Devanagari,Noto Serif Devanagari
+% Sahadeva,Samanata,Samyak Devanagari,Sarai,Shobhika
+% Arabic: Amiri, Amiri Quran, Amiri Quran Colored
+% Arab, Arial, Awami Nastaliq, Cortoba, Courier New, DejaVu Sans
+\usepackage{silence} %Selective filtering of error messages and warnings
+\WarningFilter{latex}{Command \InputIfFileExists}
+
+
+\usepackage{fontspec}
+\usepackage{xunicode} %% loading this first to avoid clash with bidi/arabic
+
+\usepackage{polyglossia} % language switching -- like babel, but for xelatex
+
+\usepackage{hologo} %%% For the xelatex (and other LaTeX friends) logos
+\usepackage{fontawesome} %  awesome fontawesome icons!
+
+\usepackage[hyphens]{url}
+
+
+\setmainlanguage{english}
+\setotherlanguages{arabic,hindi,sanskrit,greek,thai} %% or other languages
+
+
+% Main serif font for English (Latin alphabet) text
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\setmonofont{Noto Mono}
+
+% define fonts for other languages
+\newfontfamily\devanagarifont[Script=Devanagari]{Noto Serif Devanagari}
+% \newfontfamily\greekfont[Script=Greek]{GFS Artemisia}
+\newfontfamily\thaifont[Script=Thai]{Noto Serif Thai}
+\newfontfamily\arabicfont[Script=Arabic]{Noto Naskh Arabic}
+
+\usepackage[space]{xeCJK}. %%% CJK needs a different treatment
+\setCJKmainfont{Noto Serif CJK SC} %%% Assuming Chinese is the main CJK language..
+\setCJKsansfont{Noto Sans CJK SC}
+\newCJKfontfamily\japanesefont{Noto Serif CJK JP} %%% Define fonts for Japanese and Korean
+
+
+% \newCJKfontfamily\koreanfont{[UnGraphic.ttf]} % upload your own font files
+% \newCJKfontfamily\koreanfont{Noto Serif CJK KR} %..or go along font on server
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Here's where you edit the Class, Exam, Date, etc.
+\newcommand{\class}{Gr.B(Mech) 70\% Absentee}
+\newcommand{\term}{22 December 2021}
+\newcommand{\examnum}{Mechanical Dept}
+\newcommand{\examdate}{22/12/2021}
+\newcommand{\timelimit}{120 Minutes}
+
+\singlespacing      % most appropriate but can use % \onehalfspacing  or % \doublespacing
+\parindent 0ex      % For an exam, we generally want to turn off paragraph indentation
+
+% These set up the running header on the top of the exam pages
+%\firstpageheader %\firstpagefooter  %\firstpageheadrule %\firstpagefootrule
+%\runningheader  %\runningfooter %\runningheadrule %\runningfootrule
+%\pagestyle{head}
+\firstpageheader{}{}{}
+\runningheader{\class}{\examnum\ - Page \thepage\ of \numpages}{\examdate}
+\runningheadrule
+
+\firstpagefooter{}{}{}
+%\runningfooter{Math 115}{First Exam}{Page \thepage\ of \numpages}
+%\runningfooter{\class}{\examnum\ - Page \thepage\ of \numpages}{\examdate}  %??????
+\runningfootrule
+
+
+\marksnotpoints    % for points instead of Marks
+%\addpoints %\noaddpoints   %turn marking on and off in document as reqd
+% with answer: solution, solutionorbox, solutionorlines, and solutionordottedlines
+%% choices, oneparchoices, checkboxes, or oneparcheckboxes environment emphesis \CorrectChoice
+%% \answerline include an optional argument answer printed on the answer lines
+
+%\pointsinmargin   %Print  marks at left
+%\pointsinrightmargin   %Print  marks at left
+%\nopointsinmargin ~= \nopointsinrightmargin    for default  setup marks in bigining
+%\pointsdroppedatright  % but not printed until you give the command \droppoints at end of question
+
+%\bracketedpoints    %\nobracketedpoints % sq brakets instead of default perenthesis for marks, 
+%\boxedpoints %\noboxedpoints   % for boxing unboxing default points
+%\marginpointname
+%\pointname{ \points}    %\pointname{ \points} is default   %can use \pointname{\%} for percent
+%\pointpoints{SingularText}{PluralText}
+\pointpoints{Mark}{Marks}   
+
+%\marksnotpoints      
+%\marginpointname{ \points}   %these two give marks instead of points
+%%\extrawidth{-1in}   \marginpointname{ \points}  %to increase margins around
+%%%info  \half for 1/2 ,     \useslantedhalf is default  ;  \usehorizontalhalf
+%%%\bonusquestion  %\bonustitledquestion  %\bonuspart  %\bonussubpart  %\bonussubsubpart  %\bonusqformat
+%%counting        \numquestions	%\numparts	%\numsubparts	%\numsubsubparts
+%%%eg This exam has \numquestions\ questions, for a total of \numpoints\ points and \numbonuspoints\ bonus points.
+%%You can use the standard LATEX commands \label and \ref to refer to questions (or parts
+
+%%%%%%MCQ
+%%Choice like list envo  \begin{choices}  \choice John \choice Paul \choice George  \end{choices}
+%%oneparchoices  for choice in single line
+%%insert a blank line before the \begin{oneparchoices} 
+%% and \answerline after the \end{oneparchoices} 
+%%%use a checkboxes environment instead of the choices environment
+%%use a oneparcheckboxes environment instead of the choices environment  %\begin{oneparcheckboxes}
+%% for answers correct choice is \CorrectChoice, which is used in place of the command \choice
+
+%%\CorrectChoiceEmphasis{\itshape} or \CorrectChoiceEmphasis{\color{red}\bfseries}} if \usepackage{color} is in preamble
+%%default is \CorrectChoiceEmphasis{\bfseries}
+%%\checkboxchar{$\Box$}  if \usepackage{amssymb} in the preamble, default is \checkboxchar{$\bigcirc$}
+%%for instructions uplevel of subindent by \uplevel{The following two parts should be answered in Greek:} or eq envoi
+%% or \fullwidth{When you finish this exam, reexamine your work,  for any errors that you may have made.} with format
+
+
+%% create answer lines for short answer questions :   solution, solutionorbox, solutionorlines, and solutionordottedlines.
+%%twice as much space \vspace*{\stretch{2}} after that question instead of \vspace*{\stretch{1}} 
+%%\vspace*{1in} inserts one inch of vertical space,  unstared no space at newpage
+%%\makeemptybox{1in}
+%%to fill the remaining space on the page with an empty box, \makeemptybox{\stretch{1}}  and \newpage
+%%insert an empty box when solutions are not being printed by solutionoremptybox environment
+%%%fill space with lines with the command \fillwithlines{length}   or \fillwithdottedlines{1in}
+%%%line gap by \setlength\linefillheight{.25in}, thickness by \setlength\linefillthickness{0.1pt}
+%%equally distribute space for answers among questions on page, \fillwithlines{\stretch{1}} and /newpage
+%%% use solutionorlines envoi
+
+
+%print answer lines for short answer questions by \answerline  
+%%\setlength\answerskip{2ex}  and \setlength\answerlinelength{1in}
+%%\answerline[the answer 43 goods ] take an optional argument for answer to print when required 
+
+%%Four environments for typing solutions to the problems  solution, solutionorbox, solutionorlines, solutionordottedlines
+%%\begin{solution}[2in]  answer text  \end{solution}  default solution is printed in a box, 2in for qpaper
+%%or \begin{solutionorbox}[2in] answertext \end{solutionorbox}
+%%or \begin{solutionorlines}[2in] answertext \end{solutionorlines}   oror \begin{solutionordottedlines}[2in]
+%%\shadedsolutions  if used \usepackage{color}
+%%or \definecolor{SolutionColor}{rgb}{0.8,0.9,1}  for defining color blue,   
+%%\unframedsolutions 
+%%for all goback to default by \framedsolutions
+%%%%%%%%%conditional in answers sheet
+%%   \ifprintanswers    Stuff to appear only when answers are being printed or blank.
+%%   \else              optional Stuff to appear only when answers are not being printed or blank.
+%%   \fi
+
+%% same things using the \ifthenelse command as automatic loaded
+%%\ifthenelse{\boolean{printanswers}} {Stuff when answers are being printed.}{Stuff when answers notprinted.}
+
+%%%Grading table
+%\gradetable[v][questions]   %prints a vertically oriented table indexed by questions
+%\gradetable[h][questions]   %prints a horizontally oriented table indexed by question
+%\gradetable[v][pages]       %vertically table indexed by page number similar \gradetable[h][pages]
+%\pointtable[h][questions]  %Only points printed
+%%%\begingradingrange{myrange} \endgradingrange{myrange} and expend by \pointsinrange{myrange},
+%%\partialgradetable{myrange}[v][questions]
+%%\pointsofquestion{3} prints the sum of the point values for question 3 and all of its subparts
+%%\bonusgradetable 
+%%\combinedgradetable[h][questions]
+
+%equall space  \vspace{\stretch{1}} after each questions or parts, etc. and end  page with \newpage. {1.5} for more space
+
+\renewcommand{\choicelabel}{(\thechoice)}
+
+\pointsinrightmargin % print marks on right, \pointstwosided s
+% \nopointsinmargin cancels
+%\marksnotpoints
+%\pointname{ \mark}
+\pointpoints{mark}{marks}
+
+%\CorrectChoiceEmphasis{\color{red}}
+\CorrectChoiceEmphasis{\color{red}\bfseries}
+% \checkboxchar{$\bigcirc$} default
+% \checkboxchar{$\Box$}
+
+%% numeric values instead of a, b c d
+%You can change the multiple choice labels in the exam package via something like this:
+% \renewcommand\thechoice{\arabic{choice}}
+% You can also change the label punctuation via
+% \renewcommand\choicelabel{(\thechoice)}
+
+% \newenvironment{boxed}
+% {commands before for new environment     }
+%    { }  %insput into the envirornments appears hare ie boxed
+%  { commands after commands for new environment     } ck brakets
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document} 
+
+\begin{center}
+ % \sffamily 
+  \bfseries
+  {\LARGE  Research Designs and Standards Organisation (RDSO) }       \\
+%\end{center}
+%\hrulefill\par
+%\begin{center}  
+\vspace{5pt}
+
+\fbox{	\fbox{\parbox{5.5in}{\centering Absentee Examination for Departmental Selection against 70\% quota for Group ‘B’ Technical Posts (PB-2 GP Rs.4800) in the\par Mechanical Department of RDSO.\\
+Time: 10:30 Hrs to 12:30 Hrs on 22 December 2021  \\ % Answers are marked in RED
+ }  }  }.    
+\end{center}
+
+\rule[1ex]{\textwidth}{1.5pt}
+
+Important Instructions:
+\begin{itemize}
+\item This question paper contains \numpages\ printed pages (including this cover page) containing \numquestions\ MCQ questions.  Check to see if any page is  missing. 
+\item Enter all requested information in the OMR sheet only.
+\item \textbf{Answer only in the OMR sheet provided}. Also read \textbf{Instructions to  candidate”} as printed on the OMR sheet.
+%\item  The printed questions are  \numquestions\ . 
+\item Please attempt all the 15 MCQ questions in section on \emph{Establishment and Financial rules}. The section on \emph{Technical subject including official language policy} contains 40 MCQ  questions \textbf{Please attempt only 35 MCQ form this section} .   
+\item Each question carries 2 marks. The maximum marks are 100 only. There shall be \textbf{negative marking} 
+of \( \frac{2}{3} \)  (two third) marks for every incorrect answers. 
+%One 3rd marks will be deducted from every wrong answer. No such deduction shall be there on any unattempted questions.
+\item \textbf{No cutting, over-writing, erasing and alteration} shall be accepted in answer sheet.
+\item 	Do not write your name or any distinguishing mark on the answer sheet portion of OMR.  Such answer sheet shall not be evaluated.
+\item 	Use of any unfair means, including any digital device such as calculator, mobile and digital watch, notes or recorded material  etc. are prohibited. 
+\item This questions paper is in bilingual i.e. Hindi/English.  In case of contradiction on Hindi/English version questions, \textbf{ the English version shall prevail over hindi translated version}.
+\item Please note that multiple choice options to the questions are printed as (A), (B), (C) and (D) in the same line in continuation to save on paper and printing resources. Please select \emph{the most appropriate best answer in the context}.
+%Part ‘A’ (technical subject including official language policy) 
+%Part ‘B’ ( establishment and finance rules)
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\vqword{Problem}
+\vqword{Question}
+\addpoints                % required here by exam.cls, even though questions haven't started yet.	
+%\gradetable[h]%[pages]    % Use [pages] to have grading table by page instead of question
+
+% \renewcommand{\choicelabel}{(\thechoice)} to get (A), (B) etc documentation file examdoc.pdf, on pages 38-39.
+
+\newpage % End of cover page
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{questions}
+\addpoints
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Question with parts
+%\newpage
+%\addpoints
+
+%\question Consider  $f(x)=x^2$.  \marginpar{example margin notes}
+%\begin{parts}
+%\part[5] Find $f'(x)$ using the limit definition of derivative.
+%\vfill
+%\part[5] Find the line tangent to the graph of $y=f(x)$ at the point where $x=2$.
+%\vfill
+%\end{parts}
+
+% If you want the total number of points for a question displayed at the top,
+% as well as the number of points for each part, then you must turn off the point-counter
+% or they will be double counted.
+
+
+%\begin{oneparchoices}
+%\choice Ringo
+%\CorrectChoice Socrates
+%\end{oneparchoices}
+
+%\begin{oneparcheckboxes}
+%\choice John
+%\CorrectChoice Socrates
+%\end{oneparcheckboxes}
+%\makeemptybox{1in}
+%\vspace*{\stretch{1}}
+%\makeemptybox{1in}
+%\setlength{\gridsize}{5mm}
+%\setlength{\gridlinewidth}{0.1pt}
+%\colorgrids
+%\smallskip \fillwithgrid{1in}
+%\fillwithgrid{length}
+% \answerline
+
+
+%\addpoints
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    MCQ       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+%\addpoints
+
+%\question Itself can be blank
+%\begin{parts}
+%\part
+%What changes to the van Allen radiation belt ?
+%\makeemptybox{1in}
+%\part
+%Where should the field generator be constructed if you want one of the vertices to be located at the Royal Observatory at Greenwich?
+%\fillwithlines{1in}
+%\end{parts}
+
+%\question[20] Identify and label the Parts in the Wagon bogie in the figure given below.
+%    \label{label:a}
+%   \begin{parts}
+%     \part Label any 10 parts correctly and Clearly. Each correct label carries 2 Marks.
+%        \begin{minipage}[t]{\linewidth}
+%                \centering
+%                \includegraphics[scale=0.5]{NRlogo.png}
+%                \captionof{figure}{Figure of Q.\ref{label:a}}
+%                \label{label:q1}
+%        \end{minipage}
+%    \end{parts}
+%\end{questions}
+%%%%%%%%%%%%%%%%%%%%%
+%\examdate
+
+\newpage
+
+\section{Establishment and Financial rules}
+%\fullwidth{\Large \textbf{Establishment and Financial rules}}
+% 5 finance questions and 10 personal questions
+\input{AMERDSO/AME70estabfinance.tex}
+
+%-------------------------
+\section{Technical subject including official language}
+%\subsection{Official language rules (Optional questions) }
+Note: Please attempt only 35 questions out of 40 MCQ questions provided in this part .
+\input{AMERDSO/AMERajbhasha70} % 5 Questions
+%\subsection{Technical subject}  % should be 35 questions
+\input{AMERDSO/AMETech70}
+
+\vskip 1cm
+\hrulefill  \BIG END OF THE EXAM \hrulefill 
+
+\end{questions}
+
+
+
+
+\newpage
+\includepdf[pages={1-6}, noautoscale, width=\paperwidth, height=\paperheight ]{AMERDSO/AME70hindi.pdf}
+% scale=.8,pagecommand={}
+
+\end{document}
+
